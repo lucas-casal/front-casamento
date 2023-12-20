@@ -8,7 +8,6 @@ export enum TypesOfGift {
 }
 export default function PixPage() {
     
-   const classNameArrow = 'absolute left-0 '
     return (
         <div 
         className="h-auto w-full"
