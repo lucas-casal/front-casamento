@@ -40,13 +40,13 @@ export default function CreatePostModal() {
       >{typeOfModal === TypesOfModal.CONFIRMATION ?
         <div
           ref={ref}
-          className= {(centralize ? 'items-center' : 'items-start' ) + ' relative flex overflow-y-scroll mx-auto h-4/5 w-full md:w-4/5 rounded-3xl border-2 border-cyan-800  bg-emerald-100/80'}
+          className= {(centralize ? 'sm:items-center' : 'sm:items-start' ) + ' relative items-start flex overflow-y-scroll mx-auto h-4/5 w-full md:w-4/5 rounded-3xl border-2 border-cyan-800  bg-emerald-100/80'}
         >
           <CreatePostForm choseAttendance={setCentralize}/>
         </div> :
         <div
         ref={ref}
-        className= {(centralize ? 'items-center' : 'items-start' ) + ' relative flex overflow-y-scroll mx-auto h-4/5 w-full md:w-3/5 rounded-3xl border-2 border-cyan-800  bg-emerald-100/80'}
+        className= {(centralize ? 'sm:items-center' : 'sm:items-start' ) + ' relative flex overflow-y-scroll mx-auto h-4/5 w-full md:w-3/5 rounded-3xl border-2 border-cyan-800  bg-emerald-100/80'}
       >
         <PixPage />
       </div>

@@ -33,6 +33,7 @@ const config: Config = {
         '10': '2.5rem'
       },
       screens: {
+        '370': '370px',
         '1000': '1000px',
         '1245': '1245px',
         'lg': '1360px',

@@ -1,4 +1,4 @@
-import { ChangeEvent, use, useEffect, useState } from "react";
+import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import NameOptions from "./CreatePostModal/NameOptions";
 import { toast } from "react-toastify";
@@ -14,7 +14,7 @@ type InputProps = {
     value: string,
     verifyDuplicates: () => string[],
     notFoundState: string[],
-    check: boolean
+    check: boolean,
 }
 
 
@@ -25,6 +25,8 @@ export default function Input(props: InputProps) {
     const [duplicated, setDuplicated] = useState(false)
     const [unauthorized, setUnauthorized] = useState(false)
     const names = JSON.parse(localStorage.getItem('GL')!)
+    const targetRef = useRef<HTMLDivElement>(null)
+
     let count = 0;
     const showOptions = () => {
         if (value.trim() !== '') {
@@ -35,6 +37,14 @@ export default function Input(props: InputProps) {
         }
     }
 
+    useEffect(() => {
+        if (targetRef.current) {
+            targetRef.current.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+            });
+          }
+    },[])
     const slowBlur = () => {
         setTimeout(() => setOpen(false), 200)
 
@@ -92,7 +102,7 @@ export default function Input(props: InputProps) {
 
     return (
         <div
-            className={(value ? (duplicated || unauthorized ? 'border-red-500' : 'border-emerald-400') : 'border-emerald-900') + ' relative flex flex-row rounded-tr-none rounded-bl-none justify-start h-16 sm:h-10 w-11/12 sm:w-5/6 ' + (typeof id === "number" ? 'mt-10' : 'mt-8') + ' sm:mt-10 rounded-lg border-solid border-2'}
+            className={(value ? (duplicated || unauthorized ? 'border-red-500' : 'border-emerald-400') : 'border-emerald-900') + ' relative flex flex-row rounded-tr-none rounded-bl-none justify-start h-16 sm:h-10 w-11/12 sm:w-5/6 ' + (typeof id === "number" ? 'mt-10' : 'mt-4') + ' sm:mt-10 rounded-lg border-solid border-2'}
             onKeyUp={() => showOptions()}
             onBlur={() => slowBlur()}
             onFocus={duplicated ? () => {} : () => alertDuplicates()}
@@ -116,7 +126,7 @@ export default function Input(props: InputProps) {
                 </div> : ''}
             {open && (id === 'name' || typeof id === 'number') && value ? <div className="absolute w-full sm:w-5/6 flex flex-col items-start justify-start pb-2 box-content bg-emerald-200 border-solid border-2 rounded-b-md border-emerald-400 top-14 sm:top-9 -right-0.5 min-h-full max-h-28 overflow-y-scroll z-50">
                 {
-                    names.map((name, index) => {
+                    names.map((name: string , index: number) => {
                         const valueFixed = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
                         const nameFixed = (name.normalize('NFD').replace(/[\u0300-\u036f]/g, '')).toLowerCase();
                         if (nameFixed.includes(valueFixed) || (nameFixed.includes(valueFixed.split(' ')[0]) && nameFixed.includes(' ' + valueFixed.split(' ')[1]))) {

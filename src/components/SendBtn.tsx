@@ -1,14 +1,26 @@
+import { RefObject, useEffect, useRef } from "react"
 import { toast } from "react-toastify"
 
 type BtnProps = {
     handleSend: () => void,
     content: string,
     verifyDuplicates: () => string[]
+
     
 }
 
 export default function SendBtn(props: BtnProps) {
     const { content, handleSend, verifyDuplicates } = props
+    const targetRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (targetRef.current) {
+            targetRef.current.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+            });
+          }
+    },[])
 
     const alertDuplicates = () => {
         const duplicates = verifyDuplicates()
@@ -30,6 +42,7 @@ export default function SendBtn(props: BtnProps) {
 
     return (
         <div
+        ref={targetRef}
         onClick={() => handleClick()} 
         className=' select-none flex flex-row items-center mt-10 mb-5 bg-emerald-200 text-emerald-950 justify-center rounded-full sm:text-3xl text-2xl h-16 w-auto pl-5 pr-5 font-redressed cursor-pointer text-center hover:font-semibold hover:text-white hover:-translate-y-1 hover:shadow-lg hover:shadow-neutral-700 hover:bg-emerald-500 transition-colors delay-100 active:bg-emerald-950 active:shadow-none active:translate-y-1'
         >

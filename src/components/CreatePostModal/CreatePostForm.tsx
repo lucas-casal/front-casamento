@@ -1,7 +1,7 @@
 
 import { FaPlus } from "react-icons/fa";
 import "@fontsource/redressed"
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Input from "../Input";
@@ -22,6 +22,7 @@ const names = [
 let notFoundArray: string[] = [];
 
 export default function CreatePostForm(props: FormProps) {
+    const targetRef = useRef<HTMLDivElement>(null)
     const [attendance, setAttendance] = useState<Attendance | null>(null)
     const [name, setName] = useState('')
     const [temporary, setTemporary] = useState('')
@@ -147,6 +148,14 @@ export default function CreatePostForm(props: FormProps) {
         })
         return duplicatedNames
     }
+    useEffect(() => {
+        if (targetRef.current) {
+            targetRef.current.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+            });
+          }
+    },[])
 
     const deleteInput = (id: number, name:string | null) => {
         setArrayGuests(arrayGuests.slice(0, id).concat(arrayGuests.slice(id+1)))
@@ -154,19 +163,19 @@ export default function CreatePostForm(props: FormProps) {
     }
     return (
         <>
-        <form className='absolute flex flex-col items-center justify-center h-auto w-full'>
-            <h1 className="w-full text-center font-gwendolyn text-5xl text-black mt-5">Confirmação de presença</h1>
+        <form className='absolute flex py-5 flex-col items-center justify-center h-auto w-full'>
+            <h1 className="w-full text-center font-gwendolyn text-5xl text-black">Confirmação de presença</h1>
             <Input check={check} notFoundState={notFoundState} verifyDuplicates={verifyDuplicates} id='name' type='name' content='Nome' placeholder="Insira aqui o seu nome" setText={handleText} value={name} deleteInput={deleteInput}/>
             <Input check={check} notFoundState={notFoundState} verifyDuplicates={verifyDuplicates} id='email' type='email' content='E-mail' placeholder="Insira aqui o seu e-mail" setText={handleText} value={email} deleteInput={deleteInput}/>
 
-            <div className="flex flex-row w-full items-center justify-evenly mt-10">
+            <div className="flex flex-row w-full items-center justify-evenly mt-4 sm:mt-10">
                 <AttendanceBtn id={Attendance.TRUE} attendance={attendance} setAttendance={setAttendance} content='Vou comparecer' />
                 <AttendanceBtn id={Attendance.FALSE} attendance={attendance} setAttendance={setAttendance} content='Não vou comparecer' />
             </div>
 
             {arrayGuests.map((guest, index) => {
                 return (
-                    <Input check={check} notFoundState={notFoundState} verifyDuplicates={verifyDuplicates} key={index} id={index} type='name' content="Nome" value={guest.name} placeholder={`Acompanhante ${index + 1}`} setText={handleText} deleteInput={deleteInput} />
+                    <Input  check={check} notFoundState={notFoundState} verifyDuplicates={verifyDuplicates} key={index} id={index} type='name' content="Nome" value={guest.name} placeholder={`Acompanhante ${index + 1}`} setText={handleText} deleteInput={deleteInput} />
                 )
             })}
             {attendance === Attendance.TRUE ? 
