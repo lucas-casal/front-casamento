@@ -29,6 +29,9 @@ const config: Config = {
       width: {
         'bgphoto': '1500px'
       },
+      minHeight: {
+        '10': '2.5rem'
+      },
       screens: {
         '1000': '1000px',
         '1245': '1245px',

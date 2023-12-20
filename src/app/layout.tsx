@@ -5,6 +5,7 @@ import './globals.css'
 import { MyGlobalContext, TypesOfModal } from '@/contexts/ModalContext'
 import { useState } from 'react';
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({
@@ -18,6 +19,10 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <title>Amanda e Lucas</title>
+        <meta property="og:title" content="Amanda e Lucas" key="title" />
+      </head>
       <MyGlobalContext.Provider value={{postModalOpen, setPostModalOpen, typeOfModal, setTypeOfModal}}>
         <body className={inter.className}>{children}</body>
       </MyGlobalContext.Provider>

@@ -12,6 +12,8 @@
     "@fontsource/aboreto": "^5.0.8",
     "@fontsource/gwendolyn": "^5.0.17",
     "@fontsource/redressed": "^5.0.17",
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
     "next": "14.0.1",
     "react": "^18",
     "react-dom": "^18",
