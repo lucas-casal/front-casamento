@@ -49,7 +49,7 @@ export default function Home() {
           Amanda e Lucas
         </h1>
 
-        <div className="absolute bottom-32 grid gap-5 text-center sm:gap-28 lg:max-w-7xl sm:w-11/12 lg:mb-0 h-28 sm:grid-cols-2 lg:text-left">
+        <div className="absolute bottom-0 sm:bottom-32 h-auto w-screen grid gap-5 text-center sm:gap-28 lg:max-w-7xl sm:w-11/12 lg:mb-0 sm:h-28 sm:grid-cols-2 lg:text-left">
 
 
           <div className='flex flex-col items-center justify-center'>
@@ -73,7 +73,7 @@ export default function Home() {
           <div className='flex flex-col items-center justify-center'>
 
             <div
-              className={(postModalOpen ? 'hidden ' : '') + "group rounded-lg border bg-opacity-50 border-cyan-300 bg-gradient-to-b h-11/12 1000:h-28 text-white h-28 to-emerald-800 from-emerald-500 w-full sm:bg-transparent sm:bg-none sm:border-transparent px-5 py-2 transition-colors hover:cursor-pointer hover:bg-opacity-50 hover:border-cyan-300 hover:bg-gradient-to-b  hover:text-white hover:shadow-cyan-500 hover:shadow-xl hover:to-blue-800 hover:from-green-300"}
+              className={(postModalOpen ? 'hidden ' : '') + "group rounded-lg border bg-opacity-50 border-cyan-300 bg-gradient-to-b h-10/12 1000:h-28 text-white to-emerald-800 from-emerald-500 w-full sm:bg-transparent sm:bg-none sm:border-transparent px-5 py-2 transition-colors hover:cursor-pointer hover:bg-opacity-50 hover:border-cyan-300 hover:bg-gradient-to-b  hover:text-white hover:shadow-cyan-500 hover:shadow-xl hover:to-blue-800 hover:from-green-300"}
               onClick={() => handleModalOpen(TypesOfModal.GIFTS)}
             >
               <h2 className={`flex flex-row items-center justify-center gap-3 mb-3 text-2xl font-semibold`}>
