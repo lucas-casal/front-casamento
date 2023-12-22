@@ -36,9 +36,9 @@ export default function Home() {
       <main className="flex box-border h-screen flex-col items-center justify-between p-24 overflow-hidden">
         {postModalOpen ? <CreatePostModal /> : ''}
         <div className='fixed top-0 z-0 bg-black bg-opacity-40 overflow-hidden w-screen h-screen ' />
-        <img alt='background-image' src={BackgroundPicture1.src} className={(postModalOpen ? 'blur-md' : '') + ' fixed sm:-top-72 -top-10 -z-10 max-w-none sm:w-bgphoto h-full sm:h-auto sm:-left-3/4 1245:left-0 1245:w-screen 1000:-left-64 md:-left-96 1245:-top-32 lg:-top-72 10xl:-top-3/4 '} />
-        <h1 className={(postModalOpen ? 'hidden ' : '') + 'fixed top-0 left-0 sm:top-10 text-center sm:w-full font-gwendolyn font-medium z-0 text-white text-6xl sm:text-8xl'}>
-          Amanda e Lucas
+        <img alt='background-image' src={BackgroundPicture1.src} className={(postModalOpen ? 'blur-md' : '') + ' fixed sm:-top-72 -left-96 460:-left-80 -top-10 -z-10 max-w-none sm:w-bgphoto h-full sm:h-auto sm:-left-3/4 1245:left-0 1245:w-screen 1000:-left-64 md:-left-96 1245:-top-32 lg:-left-96 lg:-top-96 10xl:-top-3/4 '} />
+        <h1 className={(postModalOpen ? 'hidden ' : '') + 'fixed top-0 -left-0 sm:top-10 text-center w-full font-gwendolyn font-medium z-0 text-white text-6xl sm:text-8xl'}>
+          Amanda <br className='flex sm:hidden'/> e Lucas
         </h1>
 
         <div className="absolute bottom-0 sm:bottom-32 h-auto w-screen grid text-center gap-4 sm:gap-28 lg:max-w-7xl sm:w-11/12 lg:mb-0 sm:h-28 sm:grid-cols-2 lg:text-left">
