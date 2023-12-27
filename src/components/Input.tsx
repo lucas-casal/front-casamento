@@ -1,4 +1,4 @@
-import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react";
+import { ChangeEvent, KeyboardEvent, RefObject, useEffect, useRef, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import NameOptions from "./CreatePostModal/NameOptions";
 import { toast } from "react-toastify";
@@ -26,14 +26,30 @@ export default function Input(props: InputProps) {
     const [unauthorized, setUnauthorized] = useState(false)
     const names = JSON.parse(localStorage.getItem('GL')!)
     const targetRef = useRef<HTMLDivElement>(null)
+    const [focused, setFocused] = useState<string>('')
 
     let count = 0;
+    const options: string[] = [];
     const showOptions = () => {
         if (value.trim() !== '') {
             setOpen(true)
 
         } else {
             setOpen(false)
+        }
+    }
+
+    const handleArrows = (e: KeyboardEvent<HTMLDivElement>) => {
+        const indexFocused = options.indexOf(focused)
+        if(e.key === "ArrowDown"){
+            setFocused( indexFocused === -1 ? options[0] : (indexFocused === options.length-1 ? options[0] : options[indexFocused + 1]))
+        } else if (e.key === "ArrowUp"){
+            console.log( indexFocused === -1 ? options[options.length-1] : (indexFocused === 0 ? options[options.length-1] : options[indexFocused - 1]))
+
+            setFocused( indexFocused === -1 ? options[options.length-1] : (indexFocused === 0 ? options[options.length-1] : options[indexFocused - 1]))
+        } else if (e.key === "Enter"){
+            setChosenName(focused)
+            
         }
     }
 
@@ -116,6 +132,8 @@ export default function Input(props: InputProps) {
                 onChange={(e) => handleText(e)}
                 id={id.toString()}
                 type={type}
+                onKeyDown={(e) => handleArrows(e)}
+
                 value={value}
                 placeholder={placeholder}
                 className='absolute sm:right-0 h-full w-full sm:pr-0 sm:w-5/6 font-thin sm:text-3xl text-xl text-emerald-950 text-center bg-transparent text-opacity-100 font-redressed rounded-lg'
@@ -131,8 +149,9 @@ export default function Input(props: InputProps) {
                         const nameFixed = (name.normalize('NFD').replace(/[\u0300-\u036f]/g, '')).toLowerCase();
                         if (nameFixed.includes(valueFixed) || (nameFixed.includes(valueFixed.split(' ')[0]) && nameFixed.includes(' ' + valueFixed.split(' ')[1]))) {
                             count++
+                            options.push(name)
                             return (
-                                <NameOptions key={index} id={index} name={name} setChosenName={setChosenName} />
+                                <NameOptions key={index} focused={focused} id={index} name={name} setChosenName={setChosenName} />
                             )
                         }
 
